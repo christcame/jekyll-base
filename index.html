@@ -9,7 +9,7 @@ layout: default
     <p class="intro-text">Dive into our latest posts and discover new insights and stories.</p>
   </header>
 
-  <section class="post-list">
+  <section class="post-list" id="post-list">
     {% for post in site.posts %}
       <article class="post-item">
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
@@ -25,19 +25,38 @@ layout: default
     <p class="rss-subscribe">Stay updated with our latest posts, subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a>.</p>
   </footer>
 
+  <div id="api-data" class="api-section">
+    <h2>API Data</h2>
+    <p id="api-response"></p>
+  </div>
+
 </div>
+
+<script>
+  fetch('https://api.example.com/data') // Replace with your API endpoint
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('api-response').innerText = JSON.stringify(data, null, 2);
+    })
+    .catch(error => {
+      console.error('Error fetching API data:', error);
+    });
+</script>
 
 <style>
   .home {
     font-family: 'Arial, sans-serif';
+    background-color: #fef9e7;
     color: #333;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
   .page-header {
-    background-color: #f9f9f9;
+    background-color: #f9e79f;
     padding: 20px;
     border-radius: 5px;
     text-align: center;
@@ -46,11 +65,11 @@ layout: default
   .page-heading {
     margin: 0;
     font-size: 2em;
-    color: #2c3e50;
+    color: #2e4053;
   }
 
   .intro-text {
-    color: #7f8c8d;
+    color: #1abc9c;
   }
 
   .post-list {
@@ -61,13 +80,13 @@ layout: default
   .post-item {
     margin: 20px 0;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #f1c40f;
     border-radius: 5px;
   }
 
   .post-meta {
     display: block;
-    color: #7f8c8d;
+    color: #3498db;
     margin-bottom: 10px;
   }
 
@@ -87,6 +106,9 @@ layout: default
   .rss-footer {
     text-align: center;
     margin-top: 30px;
+    background-color: #f9e79f;
+    padding: 10px;
+    border-radius: 5px;
   }
 
   .rss-subscribe {
@@ -101,5 +123,16 @@ layout: default
   .rss-subscribe a:hover {
     color: #c0392b;
   }
-</style>
 
+  .api-section {
+    background-color: #f0e68c;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 30px;
+  }
+
+  #api-response {
+    white-space: pre-wrap;
+    font-family: monospace;
+  }
+</style>
